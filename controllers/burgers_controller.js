@@ -4,7 +4,7 @@ var app = express();
 var burger = require("../models/burger");
 var exphbs = require("express-handlebars")
 
-app.get("/", function(req, res){
+router.get("/", function(req, res){
     burger.selectAll(function(data){
         var hbsObject = {
             burger: data
