@@ -1,24 +1,26 @@
 var express = require("express");
 var router = express.Router();
+var app = express();
 var burger = require("../models/burger");
+var exphbs = require("express-handlebars")
 
-router.get("/", function(req, res){
+app.get("/", function(req, res){
     burger.selectAll(function(data){
         var hbsObject = {
             burger: data
         };
-        console.log(hbsObject);
+        app.set('views', __dirname + '/');
         res.render("index", hbsObject);
     });
 });
 
-router.post("/api/burgers", function(req, res){
+app.post("/api/burgers", function(req, res){
     burger.insertOne(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], function(result){
         res.json({ id: result.insertId});
     });
 });
 
-router.put("/api/burgers/:id", function(req, res){
+app.put("/api/burgers/:id", function(req, res){
     var condition = "id = " + req.params.id;
     console.log("condition", condition);
 
