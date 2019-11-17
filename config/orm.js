@@ -13,7 +13,7 @@ var orm = {
 
     insertOne: function(burgerName, devoured, cb){
         var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES (?,?)";
-        connection.query(queryString, burgerName, devoured, function(err, result){
+        connection.query(queryString, [burgerName, devoured], function(err, result){
             if(err){
                 throw err;
             };
